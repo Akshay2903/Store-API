@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product Retrieval API Documentation</title>
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Product Retrieval API Documentation</h1>
+
+    <h2>Endpoint: <a href="/api/v1/products">Products routes</a></h2>
+
+    <p>This endpoint allows you to retrieve a list of products based on dynamic filtering criteria using query parameters.</p>
+
+    <h3>Query Parameters:</h3>
+
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+            <th>Example</th>
+        </tr>
+        <tr>
+            <td><code>featured</code></td>
+            <td>Filter products by whether they are featured.</td>
+            <td><code>?featured=true</code></td>
+        </tr>
+        <tr>
+            <td><code>company</code></td>
+            <td>Filter products by the company that produces them.</td>
+            <td><code>?company=ExampleCompany</code></td>
+        </tr>
+        <tr>
+            <td><code>name</code></td>
+            <td>Search for products with a name that matches a case-insensitive regular expression.</td>
+            <td><code>?name=product</code></td>
+        </tr>
+        <tr>
+            <td><code>sort</code></td>
+            <td>Sort the results by specific fields. You can specify multiple fields separated by commas.</td>
+            <td><code>?sort=price,-rating</code></td>
+        </tr>
+        <tr>
+            <td><code>fields</code></td>
+            <td>Select specific fields to include in the results. You can specify multiple fields separated by commas.</td>
+            <td><code>?fields=name,price</code></td>
+        </tr>
+        <tr>
+            <td><code>numericFilters</code></td>
+            <td>Apply numeric filters to fields like 'price' and 'rating' using comparison operators. Format: <code>field-operator-value</code>. You can specify multiple filters separated by commas.</td>
+            <td><code>?numericFilters=price>50,price<100</code></td>
+        </tr>
+        <tr>
+            <td><code>page</code></td>
+            <td>Specify the page number for pagination. Default is <code>1</code>.</td>
+            <td><code>?page=2</code></td>
+        </tr>
+        <tr>
+            <td><code>limit</code></td>
+            <td>Specify the number of items per page. Default is <code>10</code>.</td>
+            <td><code>?limit=23</code></td>
+        </tr>
+    </table>
+
+    <h3>Example Request:</h3>
+
+    <pre>
+        <code>GET /api/v1/products?featured=true&company=ExampleCompany&name=product&sort=price,-rating&fields=name,price&numericFilters=price>50,price<100&page=2&limit=20</code>
+    </pre>
+
+    <h3>Example Response:</h3>
+
+    <pre>
+        <code>
+{
+    "products": [
+        {
+            "name": "Product A",
+            "price": 75.99
+        },
+        {
+            "name": "Product B",
+            "price": 89.99
+        },
+        // ... (other products)
+    ],
+    "nbHits": 10
+}
+        </code>
+    </pre>
+
+</body>
+</html>
